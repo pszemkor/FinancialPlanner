@@ -1,0 +1,18 @@
+{
+  "name": "finances",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Przemyslaw Jablecki",
+  "license": "ISC",
+  "devDependencies": {
+    "lite-server": "^2.5.4"
+  },
+  "dependencies": {
+    "@angular/cdk": "^10.0.1",
+    "@angular/material": "^10.0.1"
+  }
+}
