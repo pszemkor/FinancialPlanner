@@ -13,13 +13,15 @@ import {MatListModule} from '@angular/material/list';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {FlexModule} from "@angular/flex-layout";
 import { FinancesComponent } from './finances/finances.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    FinancesComponent
+    FinancesComponent,
+    AboutComponent
   ],
   imports: [
     AppRoutingModule,
