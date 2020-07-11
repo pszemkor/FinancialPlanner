@@ -1,1 +1,102 @@
+@import "~@angular/material/theming";
+
+@include mat-core();
+$hello-primary: mat-palette($mat-indigo);
+$hello-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$hello-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$hello-theme: mat-light-theme($hello-primary, $hello-accent, $hello-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($hello-theme);
+
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  padding: 0;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.container {
+  margin: 20px;
+  display: flex;
+}
+
+$lt-gray: #ddd;
+$background-dark: rgb(66, 4, 212);
+$background-light: #9575cd;
+$background-pale: rgb(90, 150, 219);
+$primary-color-dark: #512da8;
+$primary-color: #673ab7;
+$primary-color-light: #d1c4e9;
+$primary-color-text: #ffffff;
+$accent-color: #ffc107;
+$primary-text-color: #212121;
+$secondary-text-color: #757575;
+$divider-color: #bdbdbd;
+
+@mixin zero-margin($pad-up-down, $pad-left-right) {
+  margin: 0px auto;
+  padding: $pad-up-down $pad-left-right;
+}
+
+.background-primary {
+  background-color: $background-dark !important;
+}
+.background-accent {
+  background-color: $accent-color !important;
+}
+.text-floral-white {
+  color: floralwhite !important;
+}
+.error_color {
+  color: rgb(212, 4, 4);
+}
+
+.text_black {
+  color: black !important;
+}
+
+.flex-spacer {
+  flex: 1 1 auto;
+}
+
+.highlight {
+  background-color: $background-pale;
+  border: 1px solid $primary-color-dark;
+  z-index: 1;
+  transform: scale(1.01);
+}
+.full-width {
+  width: 95%;
+}
+
+.half-width {
+  width: 45%;
+}
+
+.form-size {
+  width: 75%;
+}
+
+.main-div{
+  //height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mat-size{
+  width: 500px;
+}
+
