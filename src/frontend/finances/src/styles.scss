@@ -1,7 +1,7 @@
 @import "~@angular/material/theming";
 
 @include mat-core();
-$hello-primary: mat-palette($mat-indigo);
+$hello-primary: mat-palette($mat-amber);
 $hello-accent: mat-palette($mat-pink, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
@@ -21,6 +21,7 @@ html,
 body {
   height: 100%;
 }
+
 body {
   padding: 0;
   margin: 0;
@@ -53,12 +54,15 @@ $divider-color: #bdbdbd;
 .background-primary {
   background-color: $background-dark !important;
 }
+
 .background-accent {
   background-color: $accent-color !important;
 }
+
 .text-floral-white {
   color: floralwhite !important;
 }
+
 .error_color {
   color: rgb(212, 4, 4);
 }
@@ -77,6 +81,7 @@ $divider-color: #bdbdbd;
   z-index: 1;
   transform: scale(1.01);
 }
+
 .full-width {
   width: 95%;
 }
@@ -89,14 +94,14 @@ $divider-color: #bdbdbd;
   width: 75%;
 }
 
-.main-div{
+.main-div {
   //height: 10vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.mat-size{
+.mat-size {
   width: 500px;
 }
 
