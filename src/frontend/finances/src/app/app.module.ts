@@ -17,6 +17,8 @@ import {AboutComponent} from './about/about.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {HttpClientModule} from "@angular/common/http";
 import {MonthComponent} from './month/month.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import {MonthComponent} from './month/month.component';
     FlexModule,
     FontAwesomeModule,
     HttpClientModule,
+    MatGridListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

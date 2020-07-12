@@ -13,17 +13,14 @@ export class FinancesComponent implements OnInit {
   allEvents: FinanceEvent[];
   currentYear: number;
   monthNames = monthNames;
+  balance: any;
 
   constructor(private eventsService: EventsService) {
     this.currentYear = new Date().getFullYear();
-    this.getAllEvents()
   }
 
   ngOnInit(): void {
+    this.eventsService.retrieveMonthBalance(String(this.currentYear))
+      .subscribe(events => this.balance = events);
   }
-
-  getAllEvents() {
-    this.eventsService.retrieveAllEvents().subscribe(events => this.allEvents = events)
-  }
-
 }

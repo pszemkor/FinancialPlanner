@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class EventService {
@@ -25,11 +26,11 @@ public class EventService {
         this.eventRepository.save(event);
     }
 
-    public double getTotalValueByDate(Date date) {
+    public Map<String, Double> getTotalValueByDate(Date date) {
         return this.eventRepository.getTotalValueByDate(date);
     }
 
     public List<Event> getAllEventsByDate(Date date) {
-        return this.eventRepository.getEventsByDate(date);
+        return this.eventRepository.getEventsByMonthAndYear(date);
     }
 }

@@ -15,14 +15,14 @@ export class EventsService {
               private errorProcessor: ErrorProcessorService) {
   }
 
-  retrieveAllEvents(): Observable<FinanceEvent[]> {
-    return this.http.get<FinanceEvent[]>(baseurl + "all")
-      .pipe(catchError(this.errorProcessor.handleError));
-  }
-
   retrieveAllEventsByDate(monthName: string, year: string): Observable<FinanceEvent[]> {
     let monthNumber: number = monthNames.indexOf(monthName) + 1;
     return this.http.get<FinanceEvent[]>(baseurl + "bydate/" + monthNumber + "." + year)
+      .pipe(catchError(this.errorProcessor.handleError))
+  }
+
+  retrieveMonthBalance(year: string): Observable<any> {
+    return this.http.get<any>(baseurl + "balance/" + year)
       .pipe(catchError(this.errorProcessor.handleError))
   }
 }

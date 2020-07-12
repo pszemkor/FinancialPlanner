@@ -1,14 +1,16 @@
-<mat-card fxFlex>
+<mat-card>
   <mat-card-title class="year">
     {{currentYear}}
   </mat-card-title>
-  <mat-card-content>
-    <mat-list>
-      <mat-list-item *ngFor="let month of monthNames">
-        <a mat-button [routerLink]="[currentYear, month]" routerLinkActive='active' class="margin_class" appHighlight>
-          <h1><b>{{month}}</b></h1></a>
-      </mat-list-item>
-    </mat-list>
-  </mat-card-content>
+  <mat-grid-list cols="6">
+    <mat-grid-tile *ngFor="let month of monthNames">
+      <a mat-button [routerLink]="[currentYear, month]" routerLinkActive='active' class="margin_class"
+         appHighlight>
+        <div class="month-button">
+          <p><b>{{month}}</b>:  {{balance[month.toUpperCase()]}}</p>
+        </div>
+      </a>
+    </mat-grid-tile>
+  </mat-grid-list>
 
 </mat-card>

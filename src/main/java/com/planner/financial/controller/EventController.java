@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("api/v1/events")
@@ -34,8 +35,8 @@ public class EventController {
         return this.eventService.getAllEventsByDate(date);
     }
 
-    @GetMapping(path = "{date}")
-    public Double getTotalValueOfEventsByMoth(@PathVariable("date") @DateTimeFormat(pattern = "MM.yyyy") Date date) {
+    @GetMapping(path = "/balance/{date}")
+    public Map<String, Double> getTotalValueOfEventsByMoth(@PathVariable("date") @DateTimeFormat(pattern = "yyyy") Date date) {
         return this.eventService.getTotalValueByDate(date);
     }
 }
