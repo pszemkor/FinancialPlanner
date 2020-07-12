@@ -1,21 +1,10 @@
 @import "~@angular/material/theming";
-
 @include mat-core();
 $hello-primary: mat-palette($mat-amber);
 $hello-accent: mat-palette($mat-pink, A200, A100, A400);
-
-// The warn palette is optional (defaults to red).
 $hello-warn: mat-palette($mat-red);
-
-// Create the theme object (a Sass map containing all of the palettes).
 $hello-theme: mat-light-theme($hello-primary, $hello-accent, $hello-warn);
-
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
 @include angular-material-theme($hello-theme);
-
-/* You can add global styles to this file, and also import other style files */
 
 html,
 body {
@@ -104,4 +93,19 @@ $divider-color: #bdbdbd;
 .mat-size {
   width: 500px;
 }
+
+.year {
+  font-size: 48px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.month {
+  font-size: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
 

@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {EventsService} from "../services/events.service";
+import {monthNames} from "../shared/months";
+import {FinanceEvent} from "../shared/financeEvent";
 
 @Component({
   selector: 'app-finances',
@@ -8,10 +10,9 @@ import {EventsService} from "../services/events.service";
 })
 export class FinancesComponent implements OnInit {
 
-  allEvents: Event[];
+  allEvents: FinanceEvent[];
   currentYear: number;
-  monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"];
+  monthNames = monthNames;
 
   constructor(private eventsService: EventsService) {
     this.currentYear = new Date().getFullYear();

@@ -30,7 +30,7 @@ public class EventController {
     }
 
     @GetMapping(path = "/bydate/{date}")
-    public List<Event> getAllEventsByDate(@PathVariable("date") Date date) {
+    public List<Event> getAllEventsByDate(@PathVariable("date") @DateTimeFormat(pattern = "MM.yyyy") Date date) {
         return this.eventService.getAllEventsByDate(date);
     }
 

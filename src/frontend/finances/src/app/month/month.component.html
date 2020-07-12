@@ -1,2 +1,16 @@
-<p>{{monthName}}</p>
-<p>{{year}}</p>
+<mat-card>
+  <mat-card-title class="year">
+    {{year}}
+  </mat-card-title>
+  <mat-card-subtitle class="month">
+    {{monthName}}
+  </mat-card-subtitle>
+  <mat-card-content>
+    <mat-list fxFlex>
+      <mat-list-item *ngFor="let event of events">
+        <p class="monthEvent">[{{event.date | date}}] <b>{{event.name}} {{event.value}} {{event.type}} </b></p>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
+

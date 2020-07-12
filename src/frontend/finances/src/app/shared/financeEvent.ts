@@ -1,4 +1,4 @@
-export class Event {
+export class FinanceEvent {
   id: string;
   type: string;
   value: number;
