@@ -12,9 +12,10 @@ import {MatTableModule} from '@angular/material/table';
 import {MatListModule} from '@angular/material/list';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {FlexModule} from "@angular/flex-layout";
-import { FinancesComponent } from './finances/finances.component';
-import { AboutComponent } from './about/about.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {FinancesComponent} from './finances/finances.component';
+import {AboutComponent} from './about/about.component';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {baseurl} from './shared/baseurl';
 
 @NgModule({
   declarations: [
