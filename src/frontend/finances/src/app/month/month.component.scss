@@ -1,5 +1,6 @@
 table {
   width: 80%;
+  table-layout: fixed;
   margin-left: auto;
   margin-right: auto;
 }
@@ -10,19 +11,21 @@ table {
   margin-right: auto;
 }
 
+
 .table-content {
-  text-align: left;
+  text-align: center;
 }
 
 .table-header {
   font-size: 15px;
   font-weight: bold;
+  text-align: center;
 }
 
 .income-cell {
-  background-color: #64c44f;
+  background-color: #b0eaa2;
 }
 
 .expenditure-cell {
-  background-color: #f16e80;
+  background-color: #db9da5;
 }
