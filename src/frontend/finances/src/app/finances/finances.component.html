@@ -1,1 +1,7 @@
-<p>finances works!</p>
+<mat-card fxFlex>
+  <mat-list>
+    <mat-list-item *ngFor="let event of allEvents">
+      <p>{{event | json}}</p>
+    </mat-list-item>
+  </mat-list>
+</mat-card>

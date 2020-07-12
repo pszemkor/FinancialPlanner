@@ -16,6 +16,7 @@ import {FinancesComponent} from './finances/finances.component';
 import {AboutComponent} from './about/about.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {baseurl} from './shared/baseurl';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {baseurl} from './shared/baseurl';
     MatProgressSpinnerModule,
     MatToolbarModule,
     FlexModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

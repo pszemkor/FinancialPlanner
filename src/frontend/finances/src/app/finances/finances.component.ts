@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {EventsService} from "../services/events.service";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-finances',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FinancesComponent implements OnInit {
 
-  constructor() { }
+  allEvents: Event[];
+
+  constructor(private eventsService: EventsService) {
+    this.getAllEvents()
+  }
 
   ngOnInit(): void {
+  }
+
+  getAllEvents() {
+    this.eventsService.retrieveAllEvents().subscribe(events => this.allEvents = events)
   }
 
 }
