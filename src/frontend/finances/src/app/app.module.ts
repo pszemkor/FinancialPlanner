@@ -18,6 +18,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {HttpClientModule} from "@angular/common/http";
 import {MonthComponent} from './month/month.component';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {FooterComponent} from './footer/footer.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     HeaderComponent,
     FinancesComponent,
     AboutComponent,
-    MonthComponent
+    MonthComponent,
+    FooterComponent
   ],
   imports: [
     AppRoutingModule,

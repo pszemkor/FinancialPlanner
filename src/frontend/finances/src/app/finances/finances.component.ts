@@ -21,6 +21,10 @@ export class FinancesComponent implements OnInit {
 
   ngOnInit(): void {
     this.eventsService.retrieveMonthBalance(String(this.currentYear))
-      .subscribe(events => this.balance = events);
+      .subscribe(events => {
+        console.log(events);
+        this.balance = events;
+        console.log(this.balance);
+      });
   }
 }
