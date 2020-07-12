@@ -11,9 +11,9 @@ public class Event {
     private String id;
     private Date date;
     private EventType type;
-    private Integer value;
+    private Double value;
 
-    public Event(Date date, EventType type, Integer value) {
+    public Event(Date date, EventType type, Double value) {
         this.date = date;
         this.type = type;
         this.value = value;
@@ -34,7 +34,7 @@ public class Event {
         return type;
     }
 
-    public Integer getValue() {
+    public Double getValue() {
         return value;
     }
 }
