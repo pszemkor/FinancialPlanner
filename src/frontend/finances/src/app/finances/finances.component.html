@@ -1,7 +1,14 @@
 <mat-card fxFlex>
-  <mat-list>
-    <mat-list-item *ngFor="let event of allEvents">
-      <p>{{event | json}}</p>
-    </mat-list-item>
-  </mat-list>
+  <mat-card-title id="year">
+    {{currentYear}}
+  </mat-card-title>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let month of monthNames">
+        <a mat-button [routerLink]="[currentYear, month]" routerLinkActive='active' class="margin_class" appHighlight>
+          <h1><b>{{month}}</b></h1></a>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+
 </mat-card>

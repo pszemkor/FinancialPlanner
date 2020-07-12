@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ErrorProcessorService} from "./error-processor.service";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {baseurl} from "../shared/baseurl";
 import {Observable} from "rxjs";
 import {catchError} from "rxjs/operators";
@@ -14,7 +14,7 @@ export class EventsService {
   }
 
   retrieveAllEvents(): Observable<Event[]> {
-    return this.http.get<Event[]>(baseurl)
+    return this.http.get<Event[]>(baseurl + "all")
       .pipe(catchError(this.errorProcessor.handleError));
   }
 }

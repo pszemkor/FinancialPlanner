@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {EventsService} from "../services/events.service";
-import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-finances',
@@ -10,8 +9,12 @@ import {HttpClient} from "@angular/common/http";
 export class FinancesComponent implements OnInit {
 
   allEvents: Event[];
+  currentYear: number;
+  monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"];
 
   constructor(private eventsService: EventsService) {
+    this.currentYear = new Date().getFullYear();
     this.getAllEvents()
   }
 
