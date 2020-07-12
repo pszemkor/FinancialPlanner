@@ -5,12 +5,24 @@
   <mat-card-subtitle class="month">
     {{monthName}}
   </mat-card-subtitle>
-  <mat-card-content>
-    <mat-list fxFlex>
-      <mat-list-item *ngFor="let event of events">
-        <p class="monthEvent">[{{event.date | date}}] <b>{{event.name}} {{event.value}} {{event.type}} </b></p>
-      </mat-list-item>
-    </mat-list>
+  <div class="vertical-spacer"></div>
+  <mat-card-content class="month-event">
+    <table [dataSource]="events" mat-table class="mat-elevation-z8">
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef class="table-header"> Date</th>
+        <td mat-cell *matCellDef="let event" class="table-content"> {{event.date | date}} </td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef class="table-header"> Title</th>
+        <td mat-cell *matCellDef="let event" class="table-content"> {{ event.type }} </td>
+      </ng-container>
+      <ng-container matColumnDef="value">
+        <th mat-header-cell *matHeaderCellDef class="table-header"> Value</th>
+        <td mat-cell *matCellDef="let event" class="table-content"> {{event.value }} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
   </mat-card-content>
 </mat-card>
 

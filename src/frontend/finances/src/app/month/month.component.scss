@@ -1,6 +1,28 @@
-.monthEvent {
-  font-size: 20px;
+table {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.month-event {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
+}
+
+.table-content {
+  text-align: left;
+}
+
+.table-header {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.income-cell {
+  background-color: #64c44f;
+}
+
+.expenditure-cell {
+  background-color: #f16e80;
 }

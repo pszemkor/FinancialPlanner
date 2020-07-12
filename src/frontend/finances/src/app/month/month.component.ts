@@ -12,8 +12,10 @@ export class MonthComponent implements OnInit {
   monthName: string;
   year: string;
   events: FinanceEvent[]
+  displayedColumns: string[];
 
   constructor(private route: ActivatedRoute, private eventsService: EventsService) {
+    this.displayedColumns = ['date', 'value', 'name'];
   }
 
   ngOnInit(): void {

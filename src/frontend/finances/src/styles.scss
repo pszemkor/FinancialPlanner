@@ -1,4 +1,5 @@
 @import "~@angular/material/theming";
+
 @include mat-core();
 $hello-primary: mat-palette($mat-amber);
 $hello-accent: mat-palette($mat-pink, A200, A100, A400);
@@ -106,6 +107,10 @@ $divider-color: #bdbdbd;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+}
+
+.vertical-spacer {
+  margin-bottom: 2cm;
 }
 
 
