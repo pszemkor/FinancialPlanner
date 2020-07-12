@@ -5,6 +5,7 @@ import com.planner.financial.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,5 +23,13 @@ public class EventService {
 
     public void insertEvent(Event event) {
         this.eventRepository.save(event);
+    }
+
+    public double getTotalValueByDate(Date date) {
+        return this.eventRepository.getTotalValueByDate(date);
+    }
+
+    public List<Event> getAllEventsByDate(Date date) {
+        return this.eventRepository.getEventsByDate(date);
     }
 }
