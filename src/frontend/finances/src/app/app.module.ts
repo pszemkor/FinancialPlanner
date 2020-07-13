@@ -19,6 +19,14 @@ import {HttpClientModule} from "@angular/common/http";
 import {MonthComponent} from './month/month.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {FooterComponent} from './footer/footer.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {AddEventComponent} from './add-event/add-event.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatSelectModule} from "@angular/material/select";
+import {MatNativeDateModule, MatOptionModule} from "@angular/material/core";
+import {MatInputModule} from "@angular/material/input";
+import {MatDatepickerModule} from "@angular/material/datepicker";
 
 
 @NgModule({
@@ -29,7 +37,8 @@ import {FooterComponent} from './footer/footer.component';
     FinancesComponent,
     AboutComponent,
     MonthComponent,
-    FooterComponent
+    FooterComponent,
+    AddEventComponent
   ],
   imports: [
     AppRoutingModule,
@@ -45,9 +54,19 @@ import {FooterComponent} from './footer/footer.component';
     FontAwesomeModule,
     HttpClientModule,
     MatGridListModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [MatDatepickerModule],
+  bootstrap: [AppComponent],
+  entryComponents: [AddEventComponent]
 })
 export class AppModule {
 }

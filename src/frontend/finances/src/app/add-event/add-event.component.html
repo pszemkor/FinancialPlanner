@@ -1,0 +1,43 @@
+<div class="container" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign.gt-md="space-around center">
+  <div fxFlex="40">
+    <div fxFlex fxFlexOffset="20px" class="full-width">
+      <h2>Let's add some event!</h2>
+      <form novalidate [formGroup]="paramsForm" (ngSubmit)="onSubmit()" class="mat-size">
+        <p>
+          Income or expenditure?
+          <mat-select formControlName="type" required>
+            <mat-option *ngFor="let type of types" [value]="type">
+              {{type.toLowerCase()}}
+            </mat-option>
+          </mat-select>
+        </p>
+
+        <p>
+          <mat-form-field class="full-width">
+            <input matInput formControlName="name" placeholder="Name" type="text" required>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Choose a date</mat-label>
+            <input formControlName="date" matInput [matDatepicker]="picker" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field class="full-width">
+            <input matInput formControlName="value" placeholder="Value" type="number" required>
+          </mat-form-field>
+        </p>
+
+        <div fxLayoutAlign="center">
+          <button type="submit" mat-button class="hello-primary" [disabled]="paramsForm.invalid">Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

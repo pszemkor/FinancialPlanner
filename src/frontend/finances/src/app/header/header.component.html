@@ -3,6 +3,8 @@
   <a mat-button routerLink='finances' routerLinkActive='active' class="margin_class" appHighlight><h1><b>Finances</b>
   </h1></a>
   <a mat-button [routerLink]="['about']" routerLinkActive='active' class="margin_class" appHighlight><h1>
-    <b>About</b>
-  </h1></a>
+    <b>About</b></h1></a>
+  <div class="flex-spacer"></div>
+  <button mat-button (click)="onAddEvent()"><h1>
+    <b>Add</b></h1></button>
 </mat-toolbar>
