@@ -30,7 +30,6 @@ export class AddEventComponent implements OnInit {
   }
 
   onSubmit() {
-    this.newEvent = this.paramsForm.value;
-    console.log(this.newEvent)
+    this.eventsService.addNewEvent(this.paramsForm.value);
   }
 }

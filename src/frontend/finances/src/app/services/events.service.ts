@@ -25,4 +25,9 @@ export class EventsService {
     return this.http.get<any>(baseurl + "balance/" + year)
       .pipe(catchError(this.errorProcessor.handleError))
   }
+
+  addNewEvent(event: FinanceEvent): Observable<any> {
+    return this.http.post<FinanceEvent>(baseurl, event)
+      .pipe(catchError(this.errorProcessor.handleError))
+  }
 }
