@@ -73,7 +73,6 @@ class EventServiceTest {
         assertEquals(190.0, totalValueByDate.get("OCTOBER"));
         assertEquals(1.0, totalValueByDate.get("SEPTEMBER"));
         assertEquals(0.0, totalValueByDate.get("JANUARY"));
-
     }
 
     @Test
