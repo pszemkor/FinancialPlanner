@@ -28,7 +28,7 @@ public interface EventRepository extends MongoRepository<Event, String> {
             }
             LocalDate eventDate = getLocalDate(event.getDate());
             double lastResult = monthBalance.getOrDefault(eventDate.getMonth().name(), 0.0);
-            monthBalance.put(eventDate.getMonth().name(), total + lastResult);
+            monthBalance.put(eventDate.getMonth().name(), Math.round((total + lastResult) * 100.0) / 100.0);
         }
         for (Month month : Month.values()) {
             if (!monthBalance.containsKey(month.name())) {

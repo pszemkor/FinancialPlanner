@@ -22,8 +22,8 @@ public class EventService {
         return eventRepository.findAll();
     }
 
-    public void insertEvent(Event event) {
-        this.eventRepository.save(event);
+    public Event insertEvent(Event event) {
+        return this.eventRepository.save(event);
     }
 
     public Map<String, Double> getTotalValueByDate(Date date) {

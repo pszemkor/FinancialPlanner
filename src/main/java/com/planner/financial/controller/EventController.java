@@ -26,8 +26,8 @@ public class EventController {
     }
 
     @PostMapping
-    public void insertEvent(@RequestBody Event event) {
-        this.eventService.insertEvent(event);
+    public Event insertEvent(@RequestBody Event event) {
+        return this.eventService.insertEvent(event);
     }
 
     @GetMapping(path = "/bydate/{date}")

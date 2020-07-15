@@ -27,6 +27,7 @@ export class EventsService {
   }
 
   addNewEvent(event: FinanceEvent): Observable<any> {
+    console.log("Adding new event" + event)
     return this.http.post<FinanceEvent>(baseurl, event)
       .pipe(catchError(this.errorProcessor.handleError))
   }
