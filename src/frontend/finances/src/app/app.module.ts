@@ -27,6 +27,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatNativeDateModule, MatOptionModule} from "@angular/material/core";
 import {MatInputModule} from "@angular/material/input";
 import {MatDatepickerModule} from "@angular/material/datepicker";
+import {BrowserComponent} from './browser/browser.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
     AboutComponent,
     MonthComponent,
     FooterComponent,
-    AddEventComponent
+    AddEventComponent,
+    BrowserComponent
   ],
   imports: [
     AppRoutingModule,
