@@ -19,9 +19,9 @@ export class AddEventComponent implements OnInit {
 
   createForm() {
     this.paramsForm = this.fb.group({
-      type: "",
-      value: 0,
-      name: "Name",
+      type: null,
+      value: 0.00,
+      name: "Event name",
       date: new Date()
     });
   }
