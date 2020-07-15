@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
     const dialogConfig = new MatDialogConfig()
     dialogConfig.autoFocus = true;
     // dialogConfig.disableClose = true;
-    dialogConfig.width = "60%";
+    dialogConfig.width = "50%";
     this.dialog.open(AddEventComponent, dialogConfig);
   }
 }

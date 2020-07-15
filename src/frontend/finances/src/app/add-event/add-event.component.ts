@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {FinanceEvent} from "../shared/financeEvent";
 import {EventsService} from "../services/events.service";
 
 @Component({
@@ -10,7 +9,6 @@ import {EventsService} from "../services/events.service";
 })
 export class AddEventComponent implements OnInit {
   paramsForm: FormGroup;
-  newEvent: FinanceEvent;
   types = ["INCOME", "EXPENDITURE"];
 
   constructor(private fb: FormBuilder, private eventsService: EventsService) {
