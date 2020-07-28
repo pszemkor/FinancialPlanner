@@ -1,11 +1,11 @@
 <div class="container" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign.gt-md="space-around center">
   <div fxFlex="40">
-      <form novalidate [formGroup]="paramsForm" (ngSubmit)="onSubmit()" class="mat-size">
-        <p>
-          <mat-form-field class="full-width" floatLabel="never">
-            <input matInput formControlName="name" placeholder="{{placeHolder}}" type="text" (click)="onClick()">
-          </mat-form-field>
-        </p>
-      </form>
+    <form novalidate [formGroup]="paramsForm" (ngSubmit)="onSubmit()" class="mat-size" autocomplete="off">
+      <p>
+        <mat-form-field class="full-width" floatLabel="never">
+          <input matInput formControlName="name" placeholder="{{placeHolder}}" type="text" (click)="onClick()">
+        </mat-form-field>
+      </p>
+    </form>
   </div>
 </div>
