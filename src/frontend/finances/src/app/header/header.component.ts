@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {AddEventComponent} from "../add-event/add-event.component";
+import {BrowserComponent} from "../browser/browser.component";
 
 @Component({
   selector: 'app-header',
@@ -16,10 +17,19 @@ export class HeaderComponent implements OnInit {
   }
 
   onAddEvent() {
+    const dialogConfig = HeaderComponent.getDialogConfig();
+    this.dialog.open(AddEventComponent, dialogConfig);
+  }
+
+  onSearch() {
+    const dialogConfig = HeaderComponent.getDialogConfig();
+    this.dialog.open(BrowserComponent, dialogConfig);
+  }
+
+  private static getDialogConfig() {
     const dialogConfig = new MatDialogConfig()
     dialogConfig.autoFocus = true;
-    // dialogConfig.disableClose = true;
     dialogConfig.width = "50%";
-    this.dialog.open(AddEventComponent, dialogConfig);
+    return dialogConfig;
   }
 }
