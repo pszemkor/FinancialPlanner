@@ -1,29 +1,11 @@
 <div class="container" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign.gt-md="space-around center">
   <div fxFlex="40">
-    <div fxFlex fxFlexOffset="20px" class="full-width">
-      <h2>Looking for your events?</h2>
-      <p>If you want to use </p>
       <form novalidate [formGroup]="paramsForm" (ngSubmit)="onSubmit()" class="mat-size">
         <p>
-          <mat-form-field class="full-width">
-            <input matInput formControlName="name" placeholder="Name" type="text">
+          <mat-form-field class="full-width" floatLabel="never">
+            <input matInput formControlName="name" placeholder="{{placeHolder}}" type="text" (click)="onClick()">
           </mat-form-field>
         </p>
-
-        <p>
-          <mat-form-field appearance="fill" class="full-width">
-            <mat-label>Choose a date</mat-label>
-            <input formControlName="date" matInput [matDatepicker]="picker">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-        </p>
-
-        <div fxLayoutAlign="center">
-          <button type="submit" mat-button class="hello-primary" [disabled]="paramsForm.invalid">Submit
-          </button>
-        </div>
       </form>
-    </div>
   </div>
 </div>

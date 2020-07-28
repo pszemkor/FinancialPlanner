@@ -9,6 +9,7 @@ import {EventsService} from "../services/events.service";
 })
 export class BrowserComponent implements OnInit {
   paramsForm: FormGroup;
+  placeHolder: string = 'Event name'
 
   constructor(private fb: FormBuilder, private eventsService: EventsService) {
     this.createForm();
@@ -16,8 +17,7 @@ export class BrowserComponent implements OnInit {
 
   createForm() {
     this.paramsForm = this.fb.group({
-      name: "Event name",
-      date: null
+      name: ""
     });
   }
 
@@ -26,6 +26,10 @@ export class BrowserComponent implements OnInit {
 
   onSubmit() {
     console.log(this.paramsForm.value)
+  }
+
+  onClick() {
+    this.placeHolder = ''
   }
 
 }

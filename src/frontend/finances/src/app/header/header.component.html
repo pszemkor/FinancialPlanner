@@ -6,8 +6,9 @@
   </h1></a>
   <a mat-button [routerLink]="['about']" routerLinkActive='active' class="margin_class" appHighlight><h1>
     <b>About</b></h1></a>
-  <a mat-button routerLink='browser' routerLinkActive='active' class="margin_class" appHighlight><h1><b>Browser</b></h1>
-  </a>
+  <!--  <a mat-button routerLink='browser' routerLinkActive='active' class="margin_class" appHighlight><h1><b>Browser</b></h1>-->
+  <!--  </a>-->
+  <app-browser></app-browser>
   <div class="flex-spacer"></div>
   <button mat-button (click)="onAddEvent()"><i class="fa fa-plus" style="font-size: 2.5em;"></i></button>
 
