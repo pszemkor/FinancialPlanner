@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {EventsService} from "../services/events.service";
 import {Router} from '@angular/router';
+import {SearchService} from "../services/search.service";
 
 @Component({
   selector: 'app-browser',
@@ -12,7 +13,8 @@ export class BrowserComponent implements OnInit {
   paramsForm: FormGroup;
   placeHolder: string = 'Event name'
 
-  constructor(private fb: FormBuilder, private eventsService: EventsService, private router: Router) {
+  constructor(private fb: FormBuilder, private eventsService: EventsService,
+              private router: Router, private searchService: SearchService) {
     this.createForm();
   }
 
@@ -26,8 +28,10 @@ export class BrowserComponent implements OnInit {
   }
 
   onSubmit() {
-    this.router.navigate(['results', this.paramsForm.value['name']]);
-    console.log(this.paramsForm.value['name'])
+    let query = this.paramsForm.value['name'];
+    this.router.navigate(['results', query]);
+    this.searchService.changeQuery(query);
+    console.log(query);
   }
 
   onClick() {

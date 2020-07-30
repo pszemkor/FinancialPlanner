@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {SearchService} from "../services/search.service";
 
 @Component({
   selector: 'app-browser-results',
@@ -10,11 +11,12 @@ export class BrowserResultsComponent implements OnInit {
   private name: string;
 
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private searchService: SearchService) {
     this.name = this.route.snapshot.paramMap.get('name');
   }
 
   ngOnInit(): void {
+    this.searchService.currentMessage.subscribe(name => this.name = name);
   }
 
 }
