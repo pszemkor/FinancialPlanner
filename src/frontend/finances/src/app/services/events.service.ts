@@ -26,9 +26,15 @@ export class EventsService {
       .pipe(catchError(this.errorProcessor.handleError))
   }
 
+  retrieveAllEventsByString(query: string): Observable<any> {
+    return this.http.get<any>(baseurl + "browse/" + query)
+      .pipe(catchError(this.errorProcessor.handleError))
+  }
+
   addNewEvent(event: FinanceEvent): Observable<any> {
-    console.log("Adding new event" + event)
     return this.http.post<FinanceEvent>(baseurl, event)
       .pipe(catchError(this.errorProcessor.handleError))
   }
+
+
 }
