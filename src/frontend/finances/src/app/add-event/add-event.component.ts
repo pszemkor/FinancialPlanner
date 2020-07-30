@@ -20,7 +20,8 @@ export class AddEventComponent implements OnInit {
       type: null,
       value: 0.00,
       name: "Event name",
-      date: new Date()
+      date: new Date(),
+      description: ""
     });
   }
 
