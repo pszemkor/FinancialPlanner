@@ -27,9 +27,9 @@ class EventServiceTest {
 
         Event event1 = new Event(testDate, EventType.INCOME, 1.0, "someName1", "");
         events.add(event1);
-        Event event2 = new Event(new Date(2020, Calendar.OCTOBER, 12), EventType.EXPENDITURE, 10.0, "someName2", "");
+        Event event2 = new Event(new Date(2020, Calendar.OCTOBER, 12), EventType.EXPENDITURE, 10.0, "someName2", "description");
         events.add(event2);
-        Event event3 = new Event(new Date(2021, Calendar.MARCH, 1), EventType.EXPENDITURE, 2.0, "someName3", "");
+        Event event3 = new Event(new Date(2021, Calendar.MARCH, 1), EventType.EXPENDITURE, 2.0, "someName3", "Some Description");
         events.add(event3);
         Event event4 = new Event(new Date(2020, Calendar.OCTOBER, 11), EventType.INCOME, 200.0, "someName4", "");
         events.add(event4);
@@ -38,6 +38,7 @@ class EventServiceTest {
         when(eventRepository.getEventsByMonthAndYear(testDate)).thenReturn(Collections.singletonList(event1));
         when(eventRepository.getEventsByYear(testDate)).thenReturn(Arrays.asList(event1, event2, event4));
         when(eventRepository.getTotalValueByDate(testDate)).thenCallRealMethod();
+        when(eventRepository.getAllEventsWithString("description")).thenCallRealMethod();
     }
 
     @Test
@@ -84,6 +85,15 @@ class EventServiceTest {
 
         assertEquals(1, allEventsByDate.size());
         assertEquals(referenceDate, Iterables.getOnlyElement(allEventsByDate).getDate());
+    }
+
+    @Test
+    void getAllEventsContainingString() {
+        EventService eventService = new EventService(eventRepository);
+
+        List<Event> matching = eventService.getAllEventsContainingString("description");
+
+        assertThat(matching).extracting("name").containsExactly("someName2", "someName3");
     }
 
 }

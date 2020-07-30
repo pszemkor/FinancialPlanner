@@ -33,4 +33,8 @@ public class EventService {
     public List<Event> getAllEventsByDate(Date date) {
         return this.eventRepository.getEventsByMonthAndYear(date);
     }
+
+    public List<Event> getAllEventsContainingString(String query) {
+        return this.eventRepository.getAllEventsWithString(query);
+    }
 }

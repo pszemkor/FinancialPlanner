@@ -9,33 +9,39 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.ZoneId;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Repository
 public interface EventRepository extends MongoRepository<Event, String> {
+    default List<Event> getAllEventsWithString(String query) {
+        QueryMatcher matcher = new QueryMatcher(query);
+        return findAll().stream()
+                .filter(matcher::matchesQuery)
+                .collect(Collectors.toList());
+    }
+
     default Map<String, Double> getTotalValueByDate(Date date) {
         Map<String, Double> monthBalance = new HashMap<>();
-        for (Event event : this.getEventsByYear(date)) {
-            double total = 0;
-            if (event.getType().equals(EventType.INCOME)) {
-                total += event.getValue();
-            } else {
-                total -= event.getValue();
-            }
-            LocalDate eventDate = getLocalDate(event.getDate());
-            double lastResult = monthBalance.getOrDefault(eventDate.getMonth().name(), 0.0);
-            monthBalance.put(eventDate.getMonth().name(), Math.round((total + lastResult) * 100.0) / 100.0);
-        }
-        for (Month month : Month.values()) {
-            if (!monthBalance.containsKey(month.name())) {
-                monthBalance.put(month.name(), 0.0);
-            }
-        }
+        this.getEventsByYear(date).forEach(event -> updateMonthBalance(monthBalance, event));
+
+        Arrays.stream(Month.values())
+                .filter(month -> !monthBalance.containsKey(month.name()))
+                .forEach(month -> monthBalance.put(month.name(), 0.0));
+
         return monthBalance;
+    }
+
+    private void updateMonthBalance(Map<String, Double> monthBalance, Event event) {
+        double total = 0;
+        if (event.getType().equals(EventType.INCOME)) {
+            total += event.getValue();
+        } else {
+            total -= event.getValue();
+        }
+        LocalDate eventDate = getLocalDate(event.getDate());
+        double lastResult = monthBalance.getOrDefault(eventDate.getMonth().name(), 0.0);
+        monthBalance.put(eventDate.getMonth().name(), Math.round((total + lastResult) * 100.0) / 100.0);
     }
 
     default List<Event> getEventsByYear(Date date) {

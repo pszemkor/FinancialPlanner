@@ -27,9 +27,9 @@ class EventControllerTest {
 
         Event event1 = new Event(testDate, EventType.INCOME, 1.0, "someName1", "");
         events.add(event1);
-        Event event2 = new Event(new Date(2020, Calendar.OCTOBER, 12), EventType.EXPENDITURE, 10.0, "someName2", "");
+        Event event2 = new Event(new Date(2020, Calendar.OCTOBER, 12), EventType.EXPENDITURE, 10.0, "someName2", "description");
         events.add(event2);
-        Event event3 = new Event(new Date(2021, Calendar.MARCH, 1), EventType.EXPENDITURE, 2.0, "someName3", "");
+        Event event3 = new Event(new Date(2021, Calendar.MARCH, 1), EventType.EXPENDITURE, 2.0, "someName3", "Some Description");
         events.add(event3);
         Event event4 = new Event(new Date(2020, Calendar.OCTOBER, 11), EventType.INCOME, 200.0, "someName4", "");
         events.add(event4);
@@ -37,6 +37,7 @@ class EventControllerTest {
         when(eventService.getAllEvents()).thenReturn(events);
         when(eventService.getAllEventsByDate(testDate)).thenReturn(Collections.singletonList(event1));
         when(eventService.getTotalValueByDate(testDate)).thenReturn(ImmutableMap.of("OCTOBER", 190.0, "SEPTEMBER", 1.0, "JANUARY", 0.0));
+        when(eventService.getAllEventsContainingString("description")).thenReturn(List.of(event2, event3));
     }
 
     @Test
@@ -73,5 +74,14 @@ class EventControllerTest {
         assertEquals(190.0, totalValueByDate.get("OCTOBER"));
         assertEquals(1.0, totalValueByDate.get("SEPTEMBER"));
         assertEquals(0.0, totalValueByDate.get("JANUARY"));
+    }
+
+    @Test
+    void getAllEventsContainingString() {
+        EventController eventController = new EventController(eventService);
+
+        List<Event> matching = eventController.getAllEventsContainingString("description");
+
+        assertThat(matching).extracting("name").containsExactly("someName2", "someName3");
     }
 }

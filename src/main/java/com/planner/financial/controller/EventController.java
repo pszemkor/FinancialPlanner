@@ -39,4 +39,9 @@ public class EventController {
     public Map<String, Double> getTotalValueOfEventsByMoth(@PathVariable("date") @DateTimeFormat(pattern = "yyyy") Date date) {
         return this.eventService.getTotalValueByDate(date);
     }
+
+    @GetMapping(path = "/browse/{query}")
+    List<Event> getAllEventsContainingString(@PathVariable("query") String query) {
+        return this.eventService.getAllEventsContainingString(query);
+    }
 }
