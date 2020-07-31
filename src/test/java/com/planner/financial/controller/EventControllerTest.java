@@ -1,5 +1,8 @@
 package com.planner.financial.controller;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.planner.financial.model.Event;
@@ -7,21 +10,38 @@ import com.planner.financial.model.EventType;
 import com.planner.financial.service.EventService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 
+@WebMvcTest(controllers = EventController.class)
+@ActiveProfiles("test")
+@RunWith(SpringRunner.class)
 class EventControllerTest {
+    @MockBean
     private EventService eventService;
+    @Autowired
+    protected MockMvc mvc;
 
     @BeforeEach
     void setUp() {
-        eventService = mock(EventService.class);
         List<Event> events = new LinkedList<>();
         Date testDate = new Date(2020, Calendar.SEPTEMBER, 15);
 
@@ -34,23 +54,28 @@ class EventControllerTest {
         Event event4 = new Event(new Date(2020, Calendar.OCTOBER, 11), EventType.INCOME, 200.0, "someName4", "");
         events.add(event4);
 
-        when(eventService.getAllEvents()).thenReturn(events);
+        given(eventService.getAllEvents()).willReturn(events);
         when(eventService.getAllEventsByDate(testDate)).thenReturn(Collections.singletonList(event1));
         when(eventService.getTotalValueByDate(testDate)).thenReturn(ImmutableMap.of("OCTOBER", 190.0, "SEPTEMBER", 1.0, "JANUARY", 0.0));
         when(eventService.getAllEventsContainingString("description")).thenReturn(List.of(event2, event3));
     }
 
     @Test
-    void getAll() {
-        EventController eventController = new EventController(eventService);
+    void getAll() throws Exception {
+        String uri = "/api/v1/events/all";
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
+                .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 
-        List<Event> all = eventController.getAll();
-        List<String> eventNames = all.stream()
+        int status = mvcResult.getResponse().getStatus();
+        assertEquals(200, status);
+
+        String content = mvcResult.getResponse().getContentAsString();
+        Event[] events = mapFromJson(content, Event[].class);
+        List<String> eventNames = Stream.of(events)
                 .map(Event::getName)
                 .collect(Collectors.toList());
-
-        assertEquals(4, all.size());
         assertThat(eventNames).containsOnly("someName1", "someName2", "someName3", "someName4");
+        assertThat(events).hasSize(4);
     }
 
     @Test
@@ -83,5 +108,12 @@ class EventControllerTest {
         List<Event> matching = eventController.getAllEventsContainingString("description");
 
         assertThat(matching).extracting("name").containsExactly("someName2", "someName3");
+    }
+
+    protected <T> T mapFromJson(String json, Class<T> clazz)
+            throws JsonParseException, JsonMappingException, IOException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(json, clazz);
     }
 }
