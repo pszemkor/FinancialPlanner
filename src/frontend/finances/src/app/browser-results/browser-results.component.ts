@@ -10,8 +10,8 @@ import {FinanceEvent} from "../shared/financeEvent";
   styleUrls: ['./browser-results.component.scss']
 })
 export class BrowserResultsComponent implements OnInit {
-  private name: string;
-  private events: FinanceEvent[];
+  name: string;
+  events: FinanceEvent[];
 
 
   constructor(private route: ActivatedRoute, private searchService: SearchService, private eventsService: EventsService) {
