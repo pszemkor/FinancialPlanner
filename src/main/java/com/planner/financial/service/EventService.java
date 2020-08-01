@@ -26,11 +26,11 @@ public class EventService {
         return this.eventRepository.save(event);
     }
 
-    public Map<String, Double> getTotalValueByDate(Date date) {
-        return this.eventRepository.getTotalValueByDate(date);
+    public Map<String, Double> getTotalBalanceForTheYear(Date date) {
+        return this.eventRepository.getTotalBalanceForTheYear(date);
     }
 
-    public List<Event> getAllEventsByDate(Date date) {
+    public List<Event> getAllEventsByMonthAndYear(Date date) {
         return this.eventRepository.getEventsByMonthAndYear(date);
     }
 

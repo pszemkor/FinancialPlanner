@@ -37,7 +37,7 @@ class EventServiceTest {
         when(eventRepository.findAll()).thenReturn(events);
         when(eventRepository.getEventsByMonthAndYear(testDate)).thenReturn(Collections.singletonList(event1));
         when(eventRepository.getEventsByYear(testDate)).thenReturn(Arrays.asList(event1, event2, event4));
-        when(eventRepository.getTotalValueByDate(testDate)).thenCallRealMethod();
+        when(eventRepository.getTotalBalanceForTheYear(testDate)).thenCallRealMethod();
         when(eventRepository.getAllEventsWithString("description")).thenCallRealMethod();
     }
 
@@ -69,7 +69,7 @@ class EventServiceTest {
         EventService eventService = new EventService(eventRepository);
         Date referenceDate = new Date(2020, Calendar.SEPTEMBER, 15);
 
-        Map<String, Double> totalValueByDate = eventService.getTotalValueByDate(referenceDate);
+        Map<String, Double> totalValueByDate = eventService.getTotalBalanceForTheYear(referenceDate);
 
         assertEquals(190.0, totalValueByDate.get("OCTOBER"));
         assertEquals(1.0, totalValueByDate.get("SEPTEMBER"));
@@ -81,7 +81,7 @@ class EventServiceTest {
         EventService eventService = new EventService(eventRepository);
         Date referenceDate = new Date(2020, Calendar.SEPTEMBER, 15);
 
-        List<Event> allEventsByDate = eventService.getAllEventsByDate(referenceDate);
+        List<Event> allEventsByDate = eventService.getAllEventsByMonthAndYear(referenceDate);
 
         assertEquals(1, allEventsByDate.size());
         assertEquals(referenceDate, Iterables.getOnlyElement(allEventsByDate).getDate());

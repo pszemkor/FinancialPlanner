@@ -31,13 +31,13 @@ public class EventController {
     }
 
     @GetMapping(path = "/bydate/{date}")
-    public List<Event> getAllEventsByDate(@PathVariable("date") @DateTimeFormat(pattern = "MM.yyyy") Date date) {
-        return this.eventService.getAllEventsByDate(date);
+    public List<Event> getAllEventsByMonthAndYear(@PathVariable("date") @DateTimeFormat(pattern = "MM.yyyy") Date date) {
+        return this.eventService.getAllEventsByMonthAndYear(date);
     }
 
     @GetMapping(path = "/balance/{date}")
-    public Map<String, Double> getTotalValueOfEventsByMoth(@PathVariable("date") @DateTimeFormat(pattern = "yyyy") Date date) {
-        return this.eventService.getTotalValueByDate(date);
+    public Map<String, Double> getTotalBalanceForTheYear(@PathVariable("date") @DateTimeFormat(pattern = "yyyy") Date date) {
+        return this.eventService.getTotalBalanceForTheYear(date);
     }
 
     @GetMapping(path = "/browse/{query}")

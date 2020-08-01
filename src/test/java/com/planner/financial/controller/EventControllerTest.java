@@ -56,8 +56,8 @@ class EventControllerTest {
         events.add(event4);
 
         given(eventService.getAllEvents()).willReturn(events);
-        given(eventService.getAllEventsByDate(any())).willReturn(Collections.singletonList(event1));
-        given(eventService.getTotalValueByDate(testDate)).willReturn(ImmutableMap.of("OCTOBER", 190.0, "SEPTEMBER", 1.0, "JANUARY", 0.0));
+        given(eventService.getAllEventsByMonthAndYear(any())).willReturn(Collections.singletonList(event1));
+        given(eventService.getTotalBalanceForTheYear(testDate)).willReturn(ImmutableMap.of("OCTOBER", 190.0, "SEPTEMBER", 1.0, "JANUARY", 0.0));
         given(eventService.getAllEventsContainingString("description")).willReturn(List.of(event2, event3));
     }
 
@@ -115,7 +115,7 @@ class EventControllerTest {
         EventController eventController = new EventController(eventService);
         Date referenceDate = new Date(2020, Calendar.SEPTEMBER, 15);
 
-        Map<String, Double> totalValueByDate = eventController.getTotalValueOfEventsByMoth(referenceDate);
+        Map<String, Double> totalValueByDate = eventController.getTotalBalanceForTheYear(referenceDate);
 
         assertEquals(190.0, totalValueByDate.get("OCTOBER"));
         assertEquals(1.0, totalValueByDate.get("SEPTEMBER"));

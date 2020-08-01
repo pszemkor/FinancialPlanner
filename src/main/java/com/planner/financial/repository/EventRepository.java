@@ -21,7 +21,7 @@ public interface EventRepository extends MongoRepository<Event, String> {
                 .collect(Collectors.toList());
     }
 
-    default Map<String, Double> getTotalValueByDate(Date date) {
+    default Map<String, Double> getTotalBalanceForTheYear(Date date) {
         Map<String, Double> monthBalance = new HashMap<>();
         this.getEventsByYear(date).forEach(event -> updateMonthBalance(monthBalance, event));
 
