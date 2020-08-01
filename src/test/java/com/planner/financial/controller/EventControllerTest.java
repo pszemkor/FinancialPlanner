@@ -55,12 +55,12 @@ class EventControllerTest {
         events.add(event3);
         Event event4 = new Event(new Date(2020, Calendar.OCTOBER, 11), EventType.INCOME, 200.0, "someName4", "");
         events.add(event4);
-
         given(eventService.getAllEvents()).willReturn(events);
         given(eventService.getAllEventsContainingString("description")).willReturn(List.of(event2, event3));
-        given(eventService.getAllEventsByMonthAndYear(any())).willReturn(Collections.singletonList(event1));
-        given(eventService.getTotalBalanceForTheYear(any())).willReturn(ImmutableMap.of("OCTOBER", 190.0, "SEPTEMBER", 1.0, "JANUARY", 0.0));
-        given(eventService.insertEvent(any())).willReturn(new Event(new Date(0), EventType.INCOME, 100.0, "Test", "some additional data"));
+        given(eventService.getAllEventsByMonthAndYear(any(Date.class))).willReturn(Collections.singletonList(event1));
+        given(eventService.getTotalBalanceForTheYear(any(Date.class))).willReturn(ImmutableMap.of("OCTOBER", 190.0, "SEPTEMBER", 1.0, "JANUARY", 0.0));
+        Event testEvent = new Event(new Date(0), EventType.INCOME, 100.0, "Test", "some additional data");
+        given(eventService.insertEvent(testEvent)).willReturn(testEvent);
 
     }
 

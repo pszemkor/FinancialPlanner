@@ -32,11 +32,13 @@ public class EventController {
 
     @GetMapping(path = "/bydate/{date}")
     public List<Event> getAllEventsByMonthAndYear(@PathVariable("date") @DateTimeFormat(pattern = "MM.yyyy") Date date) {
+        System.out.println("*****" + date.getDay());
         return this.eventService.getAllEventsByMonthAndYear(date);
     }
 
     @GetMapping(path = "/balance/{date}")
     public Map<String, Double> getTotalBalanceForTheYear(@PathVariable("date") @DateTimeFormat(pattern = "yyyy") Date date) {
+        System.out.println(date.getMonth() + " " + date.getDay());
         return this.eventService.getTotalBalanceForTheYear(date);
     }
 
