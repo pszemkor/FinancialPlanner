@@ -31,6 +31,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = EventController.class)
 @ActiveProfiles("test")
@@ -56,19 +57,20 @@ class EventControllerTest {
         events.add(event4);
 
         given(eventService.getAllEvents()).willReturn(events);
-        given(eventService.getAllEventsByMonthAndYear(any())).willReturn(Collections.singletonList(event1));
-        given(eventService.getTotalBalanceForTheYear(testDate)).willReturn(ImmutableMap.of("OCTOBER", 190.0, "SEPTEMBER", 1.0, "JANUARY", 0.0));
         given(eventService.getAllEventsContainingString("description")).willReturn(List.of(event2, event3));
+        given(eventService.getAllEventsByMonthAndYear(any())).willReturn(Collections.singletonList(event1));
+        given(eventService.getTotalBalanceForTheYear(any())).willReturn(ImmutableMap.of("OCTOBER", 190.0, "SEPTEMBER", 1.0, "JANUARY", 0.0));
+        given(eventService.insertEvent(any())).willReturn(new Event(new Date(0), EventType.INCOME, 100.0, "Test", "some additional data"));
+
     }
 
     @Test
     void getAll() throws Exception {
         String uri = "/api/v1/events/all";
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
-                .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
-
-        int status = mvcResult.getResponse().getStatus();
-        assertEquals(200, status);
+                .accept(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andReturn();
 
         String content = mvcResult.getResponse().getContentAsString();
         Event[] events = mapFromJson(content, Event[].class);
@@ -83,10 +85,9 @@ class EventControllerTest {
     void getAllEventsContainingString() throws Exception {
         String uri = "/api/v1/events/browse/{query}";
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri, "description")
-                .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
-
-        int status = mvcResult.getResponse().getStatus();
-        assertEquals(200, status);
+                .accept(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andReturn();
 
         String content = mvcResult.getResponse().getContentAsString();
         Event[] events = mapFromJson(content, Event[].class);
@@ -99,10 +100,10 @@ class EventControllerTest {
         Date referenceDate = new Date(2020, Calendar.SEPTEMBER, 15);
         String uri = "/api/v1/events/bydate/{date}";
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri, "09.2020")
-                .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+                .accept(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andReturn();
 
-        int status = mvcResult.getResponse().getStatus();
-        assertEquals(200, status);
         String content = mvcResult.getResponse().getContentAsString();
         List<Event> eventsByDate = Arrays.asList(mapFromJson(content, Event[].class));
 
@@ -111,15 +112,36 @@ class EventControllerTest {
     }
 
     @Test
-    void getTotalValueOfEventsByMoth() {
-        EventController eventController = new EventController(eventService);
+    void getTotalValueOfEventsByMoth() throws Exception {
         Date referenceDate = new Date(2020, Calendar.SEPTEMBER, 15);
+        String uri = "/api/v1/events/balance/{date}";
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri, "2020")
+                .accept(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andReturn();
 
-        Map<String, Double> totalValueByDate = eventController.getTotalBalanceForTheYear(referenceDate);
+        String content = mvcResult.getResponse().getContentAsString();
+        Map<String, Double> totalValueByDate = mapFromJson(content, Map.class);
+
 
         assertEquals(190.0, totalValueByDate.get("OCTOBER"));
         assertEquals(1.0, totalValueByDate.get("SEPTEMBER"));
         assertEquals(0.0, totalValueByDate.get("JANUARY"));
+    }
+
+    @Test
+    void shouldAddNewEvent() throws Exception {
+        String uri = "/api/v1/events";
+        Event testEvent = new Event(new Date(0), EventType.INCOME, 100.0, "Test", "some additional data");
+
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post(uri)
+                .accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE).content(mapToJson(testEvent)))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String content = mvcResult.getResponse().getContentAsString();
+        Event returnedEvent = mapFromJson(content, Event.class);
+        assertEquals(returnedEvent, testEvent);
     }
 
 
