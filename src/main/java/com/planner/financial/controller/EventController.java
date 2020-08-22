@@ -4,6 +4,8 @@ import com.planner.financial.model.Event;
 import com.planner.financial.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -32,18 +34,23 @@ public class EventController {
 
     @GetMapping(path = "/bydate/{date}")
     public List<Event> getAllEventsByMonthAndYear(@PathVariable("date") @DateTimeFormat(pattern = "MM.yyyy") Date date) {
-        System.out.println("*****" + date.getDay());
         return this.eventService.getAllEventsByMonthAndYear(date);
     }
 
     @GetMapping(path = "/balance/{date}")
     public Map<String, Double> getTotalBalanceForTheYear(@PathVariable("date") @DateTimeFormat(pattern = "yyyy") Date date) {
-        System.out.println(date.getMonth() + " " + date.getDay());
         return this.eventService.getTotalBalanceForTheYear(date);
     }
 
     @GetMapping(path = "/browse/{query}")
     List<Event> getAllEventsContainingString(@PathVariable("query") String query) {
         return this.eventService.getAllEventsContainingString(query);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<String> deleteEvent(@PathVariable("id") String id) {
+        this.eventService.deleteEvent(id);
+        System.out.println("DELETED");
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 }

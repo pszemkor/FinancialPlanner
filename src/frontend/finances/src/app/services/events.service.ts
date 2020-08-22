@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {baseurl} from "../shared/baseurl";
@@ -13,6 +13,12 @@ import {FinanceEvent} from "../shared/financeEvent"
 export class EventsService {
   constructor(private http: HttpClient,
               private errorProcessor: ErrorProcessorService) {
+  }
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
   }
 
   retrieveAllEventsByDate(monthName: string, year: string): Observable<FinanceEvent[]> {
@@ -37,4 +43,12 @@ export class EventsService {
   }
 
 
+  deleteEvent(event: FinanceEvent): Observable<any> {
+    console.log(event.id)
+    let httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'text/plain'})
+    };
+    return this.http.delete<string>(baseurl + event.id, httpOptions)
+      .pipe(catchError(this.errorProcessor.handleError))
+  }
 }

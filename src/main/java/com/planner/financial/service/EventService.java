@@ -37,4 +37,8 @@ public class EventService {
     public List<Event> getAllEventsContainingString(String query) {
         return this.eventRepository.getAllEventsWithString(query);
     }
+
+    public void deleteEvent(String id) {
+        this.eventRepository.deleteById(id);
+    }
 }

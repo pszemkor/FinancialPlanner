@@ -12,6 +12,7 @@ export class ErrorProcessorService {
 
   public handleError(errorResponse: HttpErrorResponse | any) {
     let errorMessage: string;
+    console.log(errorResponse)
 
     if (errorResponse instanceof ErrorEvent) {
       errorMessage = errorResponse.error.message;
