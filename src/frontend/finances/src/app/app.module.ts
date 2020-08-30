@@ -29,6 +29,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {BrowserComponent} from './browser/browser.component';
 import {BrowserResultsComponent} from './browser-results/browser-results.component';
+import { DescriptionComponent } from './description/description.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import {BrowserResultsComponent} from './browser-results/browser-results.compone
     FooterComponent,
     AddEventComponent,
     BrowserComponent,
-    BrowserResultsComponent
+    BrowserResultsComponent,
+    DescriptionComponent
   ],
   imports: [
     AppRoutingModule,
