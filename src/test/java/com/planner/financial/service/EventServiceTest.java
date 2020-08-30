@@ -96,4 +96,13 @@ class EventServiceTest {
         assertThat(matching).extracting("name").containsExactly("someName2", "someName3");
     }
 
+    @Test
+    void testDeleteEvent(){
+        EventService eventService = new EventService(eventRepository);
+
+        eventService.deleteEvent("event-id");
+
+        verify(eventRepository, times(1)).deleteById("event-id");
+    }
+
 }
