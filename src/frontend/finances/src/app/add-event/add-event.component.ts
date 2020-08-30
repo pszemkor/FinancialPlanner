@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {EventsService} from "../services/events.service";
+import {SynchronizationService} from "../services/synchronization.service";
 
 @Component({
   selector: 'app-add-event',
@@ -11,7 +12,8 @@ export class AddEventComponent implements OnInit {
   paramsForm: FormGroup;
   types = ["INCOME", "EXPENDITURE"];
 
-  constructor(private fb: FormBuilder, private eventsService: EventsService) {
+  constructor(private fb: FormBuilder, private eventsService: EventsService,
+              private synchronizationService: SynchronizationService) {
     this.createForm();
   }
 
@@ -30,6 +32,6 @@ export class AddEventComponent implements OnInit {
 
   onSubmit() {
     this.eventsService.addNewEvent(this.paramsForm.value)
-      .subscribe(next => console.log(next), error => console.log(error));
+      .subscribe(next => this.synchronizationService.updateEvent(next), error => console.log(error));
   }
 }
