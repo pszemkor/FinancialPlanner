@@ -144,6 +144,20 @@ class EventControllerTest {
         assertEquals(returnedEvent, testEvent);
     }
 
+    @Test
+    void shouldDeleteEvent() throws Exception {
+        String id = "test-id";
+        String uri = "/api/v1/events/{id}";
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete(uri, id)
+                .accept(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String content = mvcResult.getResponse().getContentAsString();
+
+        assertEquals(id, content);
+    }
+
 
     <T> T mapFromJson(String json, Class<T> clazz)
             throws JsonParseException, JsonMappingException, IOException {
