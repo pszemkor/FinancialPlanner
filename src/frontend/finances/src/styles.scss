@@ -148,7 +148,10 @@ table {
 .expenditure-cell {
   background-color: #db9da5;
 }
-
+.mat-card-style {
+  width: calc(100% - 70px);
+  height: calc(100% - 70px);
+}
 
 
 
