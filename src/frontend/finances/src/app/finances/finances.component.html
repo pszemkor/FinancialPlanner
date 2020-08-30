@@ -1,8 +1,14 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <div class="container" fxLayoutGap="10px" fxFlex fxLayout="column">
   <mat-card>
-    <mat-card-title class="year">
-      {{currentYear}}
-    </mat-card-title>
+      <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
+        <button mat-button (click)="onPreviousMonth()"><i class="fa fa-toggle-left" style="font-size: 2.0em;"></i></button>
+        <h1 class="year">{{currentYear}}</h1>
+        <button mat-button (click)="onNextMonth()"><i class="fa fa-toggle-right" style="font-size: 2.0em;"></i></button>
+      </div>
+
+
     <mat-grid-list cols="6" [gutterSize]="'2px'">
       <mat-grid-tile *ngFor="let month of monthNames">
         <a mat-button [routerLink]="[currentYear, month]" class="margin_class"
