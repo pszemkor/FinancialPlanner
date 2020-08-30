@@ -16,7 +16,7 @@ export class BrowserResultsComponent implements OnInit {
 
 
   constructor(private route: ActivatedRoute, private searchService: SearchService, private eventsService: EventsService) {
-    this.displayedColumns = ['date', 'value', 'name', 'tools'];
+    this.displayedColumns = ['date', 'value', 'name'];
   }
 
   ngOnInit(): void {

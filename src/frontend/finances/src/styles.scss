@@ -117,4 +117,40 @@ $divider-color: #bdbdbd;
   margin-left: 2cm;
 }
 
+.month-event {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table {
+  width: 80%;
+  table-layout: fixed;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.table-content {
+  text-align: center;
+}
+
+.table-header {
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px ;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.income-cell {
+  background-color: #b0eaa2;
+}
+
+.expenditure-cell {
+  background-color: #db9da5;
+}
+
+
+
 
