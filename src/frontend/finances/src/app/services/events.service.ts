@@ -45,10 +45,7 @@ export class EventsService {
 
   deleteEvent(event: FinanceEvent): Observable<any> {
     console.log(event.id)
-    let httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'text/plain'})
-    };
-    return this.http.delete<string>(baseurl + event.id, httpOptions)
+    return this.http.delete<string>(baseurl + event.id)
       .pipe(catchError(this.errorProcessor.handleError))
   }
 }
