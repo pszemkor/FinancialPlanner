@@ -1,2 +1,16 @@
-<p>results for: {{name}}</p>
-<p>{{events | json}}</p>
+<div>
+  <div fxFlex *ngIf="events">
+    <mat-list fxFlex>
+      <h3>Results for {{name}}</h3>
+      <mat-list-item *ngFor="let event of events">
+        <h4 mat-line>Title: {{event.name}}</h4>
+        <p mat-line>Date: {{event.date | date}}</p>
+        <p mat-line>{{event.value}}</p>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div fxFlex *ngIf="!events">
+    <h3>No event found</h3>
+  </div>
+</div>
+

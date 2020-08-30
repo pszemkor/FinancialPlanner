@@ -31,7 +31,6 @@ export class BrowserComponent implements OnInit {
     let query = this.paramsForm.value['name'];
     this.router.navigate(['results', query]);
     this.searchService.changeQuery(query);
-    console.log(query);
   }
 
   onClick() {

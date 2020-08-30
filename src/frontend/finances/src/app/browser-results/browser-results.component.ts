@@ -12,17 +12,26 @@ import {FinanceEvent} from "../shared/financeEvent";
 export class BrowserResultsComponent implements OnInit {
   name: string;
   events: FinanceEvent[];
+   displayedColumns: string[];
 
 
   constructor(private route: ActivatedRoute, private searchService: SearchService, private eventsService: EventsService) {
-    this.name = this.route.snapshot.paramMap.get('name');
+    this.displayedColumns = ['date', 'value', 'name', 'tools'];
   }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(m => this.initEventsForName(m.get('name')))
+  }
+
+  getEvents(): void{
     this.searchService.currentMessage.subscribe(name => {
-      this.name = name;
-      this.eventsService.retrieveAllEventsByString(name).subscribe(events => this.events = events);
+      this.initEventsForName(name);
     });
+  }
+
+  initEventsForName(name): void{
+    this.name = name;
+    this.eventsService.retrieveAllEventsByString(name).subscribe(events => this.events = events);
   }
 
 }
