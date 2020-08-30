@@ -3,6 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {SearchService} from "../services/search.service";
 import {EventsService} from "../services/events.service";
 import {FinanceEvent} from "../shared/financeEvent";
+import {SynchronizationService} from "../services/synchronization.service";
 
 @Component({
   selector: 'app-browser-results',
@@ -15,12 +16,14 @@ export class BrowserResultsComponent implements OnInit {
    displayedColumns: string[];
 
 
-  constructor(private route: ActivatedRoute, private searchService: SearchService, private eventsService: EventsService) {
+  constructor(private route: ActivatedRoute, private searchService: SearchService,
+              private eventsService: EventsService, private synchronizationService :SynchronizationService) {
     this.displayedColumns = ['date', 'value', 'name'];
   }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(m => this.initEventsForName(m.get('name')))
+    this.synchronizationService.updatedEvents.subscribe(_ => this.getEvents())
   }
 
   getEvents(): void{
