@@ -4,10 +4,9 @@ import com.planner.financial.model.Event;
 import com.planner.financial.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -48,8 +47,8 @@ public class EventController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<String> deleteEvent(@PathVariable("id") String id) {
+    public Map<String, String> deleteEvent(@PathVariable("id") String id) {
         this.eventService.deleteEvent(id);
-        return new ResponseEntity<>(id, HttpStatus.OK);
+        return Collections.singletonMap("id",id);
     }
 }

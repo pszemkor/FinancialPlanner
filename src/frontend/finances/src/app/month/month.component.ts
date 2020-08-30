@@ -34,8 +34,7 @@ export class MonthComponent implements OnInit {
 
   onDeleteButton(event: FinanceEvent): void {
     this.eventsService.deleteEvent(event)
-      .subscribe(value => console.log(value), error => console.log(error))
-    // .subscribe(value => this.getEvents());
+      .subscribe(event => this.synchronizationService.updateEvent(event), error => console.log("err" + error))
   }
 
 }

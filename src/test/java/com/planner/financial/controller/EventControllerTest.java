@@ -154,13 +154,12 @@ class EventControllerTest {
                 .andReturn();
 
         String content = mvcResult.getResponse().getContentAsString();
-
-        assertEquals(id, content);
+        Map map = mapFromJson(content, Map.class);
+        assertEquals(Collections.singletonMap("id", id), map);
     }
 
 
-    <T> T mapFromJson(String json, Class<T> clazz)
-            throws JsonParseException, JsonMappingException, IOException {
+    <T> T mapFromJson(String json, Class<T> clazz) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readValue(json, clazz);
     }

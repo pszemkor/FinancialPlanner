@@ -44,7 +44,7 @@ export class EventsService {
 
 
   deleteEvent(event: FinanceEvent): Observable<any> {
-    return this.http.delete<string>(baseurl + event.id)
+    return this.http.delete(baseurl + event.id)
       .pipe(catchError(this.errorProcessor.handleError))
   }
 }
