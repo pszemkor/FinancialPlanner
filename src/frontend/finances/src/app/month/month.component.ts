@@ -3,6 +3,9 @@ import {ActivatedRoute} from "@angular/router";
 import {EventsService} from "../services/events.service";
 import {FinanceEvent} from "../shared/financeEvent";
 import {SynchronizationService} from "../services/synchronization.service";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {BrowserComponent} from "../browser/browser.component";
+import {DescriptionComponent} from "../description/description.component";
 
 @Component({
   selector: 'app-month',
@@ -16,7 +19,7 @@ export class MonthComponent implements OnInit {
   displayedColumns: string[];
 
   constructor(private route: ActivatedRoute, private eventsService: EventsService,
-              private synchronizationService: SynchronizationService) {
+              private synchronizationService: SynchronizationService, private dialog: MatDialog) {
     this.displayedColumns = ['date', 'value', 'name', 'tools'];
   }
 
@@ -37,4 +40,17 @@ export class MonthComponent implements OnInit {
       .subscribe(event => this.synchronizationService.updateEvent(event), error => console.log("err" + error))
   }
 
+  onDescription(description: string) {
+    const dialogConfig = this.getDialogConfig();
+    dialogConfig.data = {"description": description}
+    console.log(description)
+    this.dialog.open(DescriptionComponent, dialogConfig);
+  }
+
+  private getDialogConfig() {
+    const dialogConfig = new MatDialogConfig()
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "50%";
+    return dialogConfig;
+  }
 }
